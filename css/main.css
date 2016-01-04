@@ -1,0 +1,18 @@
+.cal-table {
+	border: 2px black solid;
+	width: 70%;
+	margin: 0 auto;
+	padding: 10px 20px 10px 20px;
+}
+
+.year {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	border: 2px solid black;
+}
+
+.past {
+	background-color: black;
+}
+
