@@ -10,8 +10,9 @@
 	</head>
 	<body ng-app="app" ng-controller="MainController as main">
 		<div class="cal-table">
-			<div class="year" ng-repeat="n in main.years track by $index">
-
+			<div class="wrap" ng-repeat="cell in main.cells track by $index">
+				<div class="year" ng-class="{past: cell.inPast}">
+				</div>
 			</div>
 		</div>
 	</body>

@@ -2,18 +2,21 @@ angular.module("app").controller('MainController', [function() {
 
   var vm = this;
 
-  vm.title = 'Title from controller';
-  vm.yearsTotal = 10;
-  vm.yearsInPast = 5;
+  var yearsTotal = 60;
+  var yearsInPast = 24;
 
-  var years = [];
+  var cells = [];
 
-  for (var i = 0; i < vm.yearsInPast; i++) {
-    years.push(1);
+  for (var i = 0; i < yearsInPast; i++) {
+    cells.push({
+      inPast: true
+    });
   }
-  for (var i = vm.yearsInPast; i < vm.yearsTotal; i++) {
-    years.push(0);
+  for (var i = yearsInPast; i < yearsTotal; i++) {
+    cells.push({
+      inPast: false
+    });
   }
 
-  vm.years = years;
+  vm.cells = cells;
 }]);
