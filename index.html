@@ -37,8 +37,8 @@
 
 				<div id="resolutionSelection">
 					<label for="resolutionSelection">Select calendar resolution:</label>
-					<input type="radio" ng-model="main.data.resolution" value="months">Months
-					<input type="radio" ng-model="main.data.resolution" value="weeks" checked>Weeks
+					<input type="radio" ng-model="main.data.resolution" value="month">Months
+					<input type="radio" ng-model="main.data.resolution" value="week" checked>Weeks
 				</div>
 
 				<button ng-click="main.calculateCells()">Calculate</button>
@@ -57,7 +57,7 @@
 
 			<div class="cal-table">
 				<div class="wrap" ng-repeat="cell in main.cells track by $index">
-					<div class="month" ng-class="{past: cell.inPast}">
+					<div ng-class="{past: cell.inPast, month: main.data.resolution == 'month', week: main.data.resolution == 'week'}">
 					</div>
 				</div>
 			</div>

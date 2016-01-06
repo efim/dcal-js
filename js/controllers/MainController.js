@@ -22,8 +22,8 @@ angular.module("app").controller('MainController', [function() {
 
    var cellsData = calculateCellsData(vm.data.birthDate, lifeExpectationYears);
 
-   var cellsInPast = (vm.data.resolution == 'weeks') ? cellsData.weeksInPast : cellsData.monthsInPast;
-   var cellsInFuture = (vm.data.resolution == 'weeks') ? cellsData.weeksInFuture : cellsData.monthsInFuture;
+   var cellsInPast = (vm.data.resolution == 'week') ? cellsData.weeksInPast : cellsData.monthsInPast;
+   var cellsInFuture = (vm.data.resolution == 'week') ? cellsData.weeksInFuture : cellsData.monthsInFuture;
 
     var cells = [];
 
