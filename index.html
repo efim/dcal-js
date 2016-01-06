@@ -8,10 +8,57 @@
     	<link rel="stylesheet" type="text/css" href="css/main.css" />
 
 	</head>
-	<body ng-app="app" ng-controller="MainController as main">
-		<div class="cal-table">
-			<div class="wrap" ng-repeat="cell in main.cells track by $index">
-				<div class="year" ng-class="{past: cell.inPast}">
+	<body>
+		<div id="description">
+			<h1>Death countdown calendar</h1>
+			<p>Here you can construnct personal countdown to your estimated time of death.</p>
+			<p>Inspired by "<a href="http://waitbutwhy.com/2015/12/the-tail-end.html">The tail end</a>" piece by Wait But Why.</p>
+			<p>In a few words - life is finite and we aren't always aware of that. Comparing your remaining time to some easily measurable by eye quanitity helps with attaining perspective.</p>
+		</div>
+
+		<div id="calendar" ng-app="app" ng-controller="MainController as main">
+			<form name="input">
+				<label for="country">Select your country of residence:</label>
+				<select name="country" id="country"
+					ng-model="main.data.country"
+					ng-options="country.id as country.name for country in main.countryCodes">
+				</select>
+
+				<label for="sex">Select your sex:</label>
+				<select name="sex" id="sex"
+					ng-model="main.data.sex"
+					ng-options="sex.id as sex.name for sex in main.sexCodes">
+				</select>
+
+				<label for="birthDate">Input your birth date:</label>
+				<input type="date" name="birthDate" id="birthDate"
+					ng-attr-max="{{ main.now.toISOString().substring(0,10) }}"
+					ng-model="main.data.birthDate">
+
+				<div id="resolutionSelection">
+					<label for="resolutionSelection">Select calendar resolution:</label>
+					<input type="radio" ng-model="main.data.resolution" value="months">Months
+					<input type="radio" ng-model="main.data.resolution" value="weeks" checked>Weeks
+				</div>
+
+				<button ng-click="main.calculateCells()">Calculate</button>
+
+				<button>Reset</button>
+			</form>
+
+			<div id="debug">
+				<p>selected country: {{main.data.country}}</p>
+				<p>selected sex: {{main.data.sex}}</p>
+				<p>selected birth date: {{main.data.birthDate | date }}, raw: {{main.data.birthDate}}</p>
+				<p>selected date diff with Now(): {{ (main.now - main.data.birthDate) / (1000*60*60) }}</p>
+				<p>selected resolution is: {{ main.data.resolution }}</p>
+				<p>function returned expected years: {{main.expected}}</p>
+			</div>
+
+			<div class="cal-table">
+				<div class="wrap" ng-repeat="cell in main.cells track by $index">
+					<div class="month" ng-class="{past: cell.inPast}">
+					</div>
 				</div>
 			</div>
 		</div>
