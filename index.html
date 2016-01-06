@@ -46,15 +46,15 @@
 				<button>Reset</button>
 			</form>
 
-			<div id="debug">
+<!-- 			<div id="debug" style="display: none">
 				<p>selected country: {{main.data.country}}</p>
 				<p>selected sex: {{main.data.sex}}</p>
 				<p>selected birth date: {{main.data.birthDate | date }}, raw: {{main.data.birthDate}}</p>
 				<p>selected date diff with Now(): {{ (main.now - main.data.birthDate) / (1000*60*60) }}</p>
 				<p>selected resolution is: {{ main.data.resolution }}</p>
-				<p>function returned expected years: {{main.expected}}</p>
 			</div>
 
+ -->
 			<div class="cal-table">
 				<div class="wrap" ng-repeat="cell in main.cells track by $index">
 					<div ng-class="{past: cell.inPast, month: main.data.resolution == 'month', week: main.data.resolution == 'week'}">
