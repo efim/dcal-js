@@ -1,23 +1,30 @@
 .cal-table {
-	border: 2px black solid;
-	width: 70%;
+	border: 2px #FAFAFA solid;
+	width: 468px;
 	margin: 0 auto;
-	padding: 10px 20px 10px 20px;
 }
 
 .wrap {
 	display: inline-block;
 }
 
-.year {
-	display: inline-block;
-	width: 10px;
-	height: 10px;
+.month {
+	width: 7px;
+	height: 7px;
 	border: 2px solid black;
+	border-radius: 100%;
+	margin: 1px;
+
+}
+
+.week {
+	width: 5px;
+	height: 5px;
+	border: 1px solid black;
 	margin: 1px;
 }
 
 .past {
-	background-color: black;
+	background-color: #888888;
 }
 

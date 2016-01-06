@@ -2,17 +2,17 @@ angular.module("app").controller('MainController', [function() {
 
   var vm = this;
 
-  var yearsTotal = 60;
-  var yearsInPast = 24;
+  var cellstTotal = 1080; //months in 90 y.o life
+  var cellstInPast = 288; //month in past of 24 y.o person
 
   var cells = [];
 
-  for (var i = 0; i < yearsInPast; i++) {
+  for (var i = 0; i < cellstInPast; i++) {
     cells.push({
       inPast: true
     });
   }
-  for (var i = yearsInPast; i < yearsTotal; i++) {
+  for (var i = cellstInPast; i < cellstTotal; i++) {
     cells.push({
       inPast: false
     });
