@@ -13,7 +13,7 @@
 			<h1>Death countdown calendar</h1>
 			<p>Here you can construnct personal countdown to your estimated time of death.</p>
 			<p>Inspired by "<a href="http://waitbutwhy.com/2015/12/the-tail-end.html">The tail end</a>" piece by Wait But Why.</p>
-			<p>In a few words - life is finite and we aren't always aware of that. Comparing your remaining time to some easily measurable by eye quanitity helps with attaining perspective.</p>
+			<p>Life is finite and we aren't always aware of that. Comparing your remaining time to some easily measurable by eye quanitity helps with attaining perspective.</p>
 		</div>
 
 		<div id="calendar" ng-app="app" ng-controller="MainController as main">
@@ -37,8 +37,8 @@
 
 				<div id="resolutionSelection">
 					<label for="resolutionSelection">Select calendar resolution:</label>
-					<input type="radio" ng-model="main.data.resolution" value="month">Months
-					<input type="radio" ng-model="main.data.resolution" value="week" checked>Weeks
+					<input type="radio" ng-model="main.data.resolution" value="month" ng-change='main.showCells()'>Months
+					<input type="radio" ng-model="main.data.resolution" value="week"  ng-change='main.showCells()' checked>Weeks
 				</div>
 
 				<button ng-click="main.calculateCells()">Calculate</button>
@@ -56,7 +56,7 @@
 
  -->
 			<div class="cal-table">
-				<div class="wrap" ng-repeat="cell in main.cells track by $index">
+				<div class="wrap" ng-repeat="cell in main.cells.active track by $index">
 					<div ng-class="{past: cell.inPast, month: main.data.resolution == 'month', week: main.data.resolution == 'week'}">
 					</div>
 				</div>

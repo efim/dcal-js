@@ -13,18 +13,53 @@ angular.module("app").controller('MainController', [function() {
     country: null,
     sex: null,
     resolution: null,
-    toShow: false
+  };
+
+  vm.cells = {
+    week: null,
+    month: null,
+    active: null
   };
 
   TODO: 
   vm.calculateCells = function() {
-   var lifeExpectationYears = getWHOObservation(vm.data);
+    calculateCells(vm);
+  };
 
-   var cellsData = calculateCellsData(vm.data.birthDate, lifeExpectationYears);
+  vm.showCells = function() {
+    showCells(vm);
+  }
 
-   var cellsInPast = (vm.data.resolution == 'week') ? cellsData.weeksInPast : cellsData.monthsInPast;
-   var cellsInFuture = (vm.data.resolution == 'week') ? cellsData.weeksInFuture : cellsData.monthsInFuture;
+}]);
 
+var calculateCells = function(vm) {
+    var lifeExpectationYears = getWHOObservation(vm.data);
+
+    var cellsData = calculateCellsData(vm.data.birthDate, lifeExpectationYears);
+
+    vm.cells.week = initiateCells(cellsData.weeksInPast, cellsData.weeksInFuture);
+    vm.cells.month = initiateCells(cellsData.monthsInPast, cellsData.monthsInFuture);
+
+    showCells(vm);
+  };
+
+
+var calculateCellsData = function(birthDate, expectedYears) {
+  var cellsData = {};
+  var now = new Date();
+  cellsData.weeksInPast = (now - birthDate) / (1000 * 60 * 60 * 24 * 7);
+  cellsData.monthsInPast = (now - birthDate) / (1000 * 60 * 60 * 24 * 30.5);
+  cellsData.weeksInFuture = (expectedYears * 365) / 7;
+  cellsData.monthsInFuture = (expectedYears * 365) / 30.5;
+
+  return cellsData;
+};
+
+var showCells = function(vm) {
+  vm.cells.active = (vm.data.resolution == 'week') ? vm.cells.week : vm.cells.month;
+}
+
+var initiateCells = function(cellsInPast, cellsInFuture) {
     var cells = [];
 
     for (var i = 0; i < cellsInPast; i++) {
@@ -38,63 +73,27 @@ angular.module("app").controller('MainController', [function() {
       });
     }
 
-    vm.cells = cells;
-    vm.data.toShow = true;
-  }
-
-}]);
-
-
-
+    return cells;
+};
 
 var getCountryCodesMapping = function() {
   return [
   {id: 'RU', name: "Russia"},
   {id: 'UK', name: "United Kingdom"}
   ];
-}
+};
 
 var getSexCodesMapping = function() {
   return [
   {id: 'FMLE', name: 'Female'},
   {id: 'MLE', name: 'Male'}
   ];
-}
-
-// //TODO:
-// var getQueryFilterData = function() {
-//     var queryFilerData = {};
-
-//     setAgeGroup(queryFilerData);
-//     setSex(queryFilerData);
-//     setCountry(queryFilerData);
-//     setStaticFilterValues(queryFilerData);
-
-//     return queryFilerData;
-// }
-
-// //TODO:
-// var getQueryFilter = function () {
-//   //var queryFilterData = getQueryFilterData();
-//   //for property in queryFilterData
-//   //make string like COUNTRY:RUS;YEAR:2013
-// }
+};
 
 //TODO:
 var getWHOObservation = function(userData) {
   //get query filter from userData
   //return call to WHO server\
   //actually just return expected number of years left.
-  return 40;
-} 
-
-var calculateCellsData = function(birthDate, expectedYears) {
-  var cellsData = {};
-  var now = new Date();
-  cellsData.weeksInPast = (now - birthDate) / (1000 * 60 * 60 * 24 * 7);
-  cellsData.monthsInPast = (now - birthDate) / (1000 * 60 * 60 * 24 * 30.5);
-  cellsData.weeksInFuture = (expectedYears * 365) / 7;
-  cellsData.monthsInFuture = (expectedYears * 365) / 30.5;
-
-  return cellsData;
-}
+  return 10;
+};
