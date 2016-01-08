@@ -8,7 +8,9 @@ angular.module("app").factory('whoLifeExpectancyService', ['$http', function($ht
 
 			//var urlParameters = getUrlParameters(userData);
 			//var urlRequest = databaseURL + "?filter=" + filterParameters + "&format=json";
-			var urlRequest = 'http://apps.who.int/gho/athena/api/GHO/LIFE_0000000035?filter=COUNTRY:RUS;YEAR:2013;SEX:MLE;AGEGROUP:AGE25-29&format=json';
+			//var urlRequest = 'http://apps.who.int/gho/athena/api/GHO/LIFE_0000000035?filter=COUNTRY:RUS;YEAR:2013;SEX:MLE;AGEGROUP:AGE25-29&format=json';
+			//var urlRequest = 'https://api.guildwars2.com/v1/wvw/matches.json';
+			var urlRequest = '/data/LIFE_0000000035.json';
 
 			$http({
 				method: 'GET',
